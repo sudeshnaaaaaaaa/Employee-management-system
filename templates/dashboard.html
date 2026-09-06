@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Overview — Ledger{% endblock %}
+{% block content %}
+
+<header class="page-head">
+    <h1>Overview</h1>
+    <p>A running account of headcount, payroll, and active work.</p>
+</header>
+
+<section class="stat-row">
+    <div class="stat">
+        <span class="stat-value">{{ totals['total_employees'] }}</span>
+        <span class="stat-label">People</span>
+    </div>
+    <div class="stat">
+        <span class="stat-value">₹{{ '{:,.0f}'.format(totals['total_payroll'] or 0) }}</span>
+        <span class="stat-label">Total annual payroll</span>
+    </div>
+    <div class="stat">
+        <span class="stat-value">{{ project_count }}</span>
+        <span class="stat-label">Active projects</span>
+    </div>
+</section>
+
+<section class="panel">
+    <h2>By department</h2>
+    <table class="ledger-table">
+        <thead>
+            <tr>
+                <th>Department</th>
+                <th>Headcount</th>
+                <th>Average salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in dept_stats %}
+            <tr>
+                <td>{{ row['department'] }}</td>
+                <td>{{ row['headcount'] }}</td>
+                <td>{% if row['avg_salary'] %}₹{{ '{:,.0f}'.format(row['avg_salary']) }}{% else %}—{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+{% endblock %}

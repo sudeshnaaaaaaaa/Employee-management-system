@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Projects — Ledger{% endblock %}
+{% block content %}
+
+<header class="page-head">
+    <h1>Projects</h1>
+    <p>Active work and who is staffed on it.</p>
+</header>
+
+<section class="card-grid">
+    {% for p in projects %}
+    <article class="project-card">
+        <div class="project-card-head">
+            <h3>{{ p['name'] }}</h3>
+            <span class="tag">{{ p['department'] or 'Unassigned' }}</span>
+        </div>
+        <p class="muted">Deadline: {{ p['deadline'] or 'Not set' }}</p>
+        <ul class="team-list">
+            {% for member in teams_by_project.get(p['id'], []) %}
+            <li>{{ member['first_name'] }} {{ member['last_name'] }} — {{ member['hours_per_week'] }} hrs/wk</li>
+            {% else %}
+            <li class="muted">No one staffed yet</li>
+            {% endfor %}
+        </ul>
+    </article>
+    {% endfor %}
+</section>
+
+{% endblock %}

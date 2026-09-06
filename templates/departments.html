@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Departments — Ledger{% endblock %}
+{% block content %}
+
+<header class="page-head">
+    <h1>Departments</h1>
+</header>
+
+<section class="panel">
+    <table class="ledger-table">
+        <thead>
+            <tr><th>Name</th><th>Location</th></tr>
+        </thead>
+        <tbody>
+            {% for d in departments %}
+            <tr>
+                <td>{{ d['name'] }}</td>
+                <td>{{ d['location'] or '—' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+{% endblock %}

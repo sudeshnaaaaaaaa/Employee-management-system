@@ -1,0 +1,222 @@
+/* ---------- Tokens ---------- */
+:root {
+    --ink: #1E2A38;
+    --ink-soft: #4A5A6A;
+    --paper: #F5F6F2;
+    --paper-raised: #FFFFFF;
+    --line: #DAD9D1;
+    --accent: #2F6F62;
+    --accent-soft: #E4EEEA;
+    --danger: #A3423A;
+    --radius: 3px;
+    font-size: 16px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.5;
+}
+
+h1, h2, h3 {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+    font-weight: 600;
+    margin: 0;
+    color: var(--ink);
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- Layout ---------- */
+.frame {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    min-height: 100vh;
+}
+
+.rail {
+    background: var(--ink);
+    color: #E7E9EA;
+    padding: 28px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+}
+
+.rail-mark {
+    font-family: Georgia, serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.02em;
+    color: #fff;
+}
+
+.rail-nav { display: flex; flex-direction: column; gap: 4px; }
+
+.rail-nav a {
+    color: #B7C0C8;
+    padding: 9px 10px;
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+}
+
+.rail-nav a:hover { color: #fff; text-decoration: none; background: rgba(255,255,255,0.06); }
+.rail-nav a.active { color: #fff; background: var(--accent); }
+
+.content {
+    padding: 40px 48px;
+    max-width: 980px;
+}
+
+/* ---------- Page head ---------- */
+.page-head { margin-bottom: 28px; }
+.page-head h1 { font-size: 1.8rem; }
+.page-head p { color: var(--ink-soft); margin: 6px 0 0; }
+.page-head-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+/* ---------- Stats ---------- */
+.stat-row {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 32px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--line);
+}
+.stat { display: flex; flex-direction: column; gap: 2px; }
+.stat-value { font-family: Georgia, serif; font-size: 1.9rem; color: var(--ink); }
+.stat-label { color: var(--ink-soft); font-size: 0.85rem; }
+
+/* ---------- Panels & tables ---------- */
+.panel { margin-bottom: 32px; }
+.panel h2 { font-size: 1.15rem; margin-bottom: 14px; }
+.panel-narrow { max-width: 480px; }
+
+.ledger-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+}
+.ledger-table th, .ledger-table td {
+    text-align: left;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.93rem;
+}
+.ledger-table th {
+    color: var(--ink-soft);
+    font-weight: 600;
+    font-size: 0.8rem;
+    background: #FAFAF7;
+}
+.ledger-table tr:last-child td { border-bottom: none; }
+.muted { color: var(--ink-soft); font-size: 0.85rem; }
+.empty { text-align: center; color: var(--ink-soft); padding: 24px; }
+
+.row-actions { display: flex; gap: 12px; align-items: center; }
+.row-actions form { display: inline; }
+.link-danger {
+    background: none; border: none; padding: 0; cursor: pointer;
+    color: var(--danger); font-size: 0.9rem; text-decoration: none;
+    font-family: inherit;
+}
+.link-danger:hover { text-decoration: underline; }
+
+/* ---------- Forms ---------- */
+.search-row { display: flex; gap: 10px; margin-bottom: 20px; }
+.search-row input[type=text] {
+    flex: 1; max-width: 340px;
+}
+
+.stack-form { display: flex; flex-direction: column; gap: 16px; }
+.stack-form label {
+    display: flex; flex-direction: column; gap: 6px;
+    font-size: 0.85rem; color: var(--ink-soft);
+}
+
+input, select, textarea {
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 9px 11px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--paper-raised);
+    color: var(--ink);
+}
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.form-actions { display: flex; gap: 12px; margin-top: 8px; }
+
+/* ---------- Buttons ---------- */
+.btn {
+    display: inline-block;
+    padding: 9px 16px;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: #285d52; text-decoration: none; }
+.btn-quiet { background: transparent; border-color: var(--line); color: var(--ink); }
+.btn-quiet:hover { background: var(--paper-raised); text-decoration: none; }
+
+/* ---------- Project cards ---------- */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+}
+.project-card {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px;
+}
+.project-card-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px; margin-bottom: 6px;
+}
+.project-card h3 { font-size: 1.05rem; }
+.tag {
+    font-size: 0.72rem;
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 3px 8px;
+    border-radius: 12px;
+    white-space: nowrap;
+}
+.team-list { list-style: none; padding: 0; margin: 12px 0 0; font-size: 0.88rem; }
+.team-list li { padding: 4px 0; border-top: 1px solid var(--line); }
+.team-list li:first-child { border-top: none; }
+
+/* ---------- Flash messages ---------- */
+.flash-stack { margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px; }
+.flash {
+    padding: 10px 14px;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+}
+.flash-success { background: var(--accent-soft); color: var(--accent); }
+.flash-error { background: #F5E6E4; color: var(--danger); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+    .frame { grid-template-columns: 1fr; }
+    .rail { flex-direction: row; align-items: center; padding: 16px 20px; }
+    .rail-nav { flex-direction: row; }
+    .content { padding: 24px; }
+    .stat-row { flex-wrap: wrap; gap: 20px; }
+}
