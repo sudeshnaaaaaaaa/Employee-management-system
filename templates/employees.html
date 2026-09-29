@@ -20,11 +20,11 @@
     <table class="ledger-table">
         <thead>
             <tr>
-                <th>Name</th>
+                <th><a href="{{ url_for('list_employees', search=search, sort='name', direction='asc' if sort=='name' and direction=='desc' else 'desc') }}">Name {% if sort=='name' %}{{ '↓' if direction=='desc' else '↑' }}{% endif %}</a></th>
                 <th>Role</th>
                 <th>Department</th>
-                <th>Salary</th>
-                <th>Hired</th>
+                <th><a href="{{ url_for('list_employees', search=search, sort='salary', direction='asc' if sort=='salary' and direction=='desc' else 'desc') }}">Salary {% if sort=='salary' %}{{ '↓' if direction=='desc' else '↑' }}{% endif %}</a></th>
+                <th><a href="{{ url_for('list_employees', search=search, sort='hire_date', direction='asc' if sort=='hire_date' and direction=='desc' else 'desc') }}">Hired {% if sort=='hire_date' %}{{ '↓' if direction=='desc' else '↑' }}{% endif %}</a></th>
                 <th></th>
             </tr>
         </thead>
