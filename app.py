@@ -51,6 +51,17 @@ def dashboard():
 def list_employees():
     conn = get_connection()
     search = request.args.get("search", "").strip()
+    sort = request.args.get("sort", "id")
+    direction = request.args.get("direction", "desc")
+
+    # Only allow these exact column names, to keep the query safe
+    allowed_sorts = {
+        "name": "e.first_name",
+        "salary": "e.salary",
+        "hire_date": "e.hire_date",
+    }
+    sort_column = allowed_sorts.get(sort, "e.id")
+    direction = "ASC" if direction == "asc" else "DESC"
 
     query = """
         SELECT e.id, e.first_name, e.last_name, e.email, e.role,
@@ -64,11 +75,14 @@ def list_employees():
                      OR e.role LIKE ? OR d.name LIKE ?"""
         like = f"%{search}%"
         params = [like, like, like, like]
-    query += " ORDER BY e.id DESC"
+    query += f" ORDER BY {sort_column} {direction}"
 
     employees = conn.execute(query, params).fetchall()
     conn.close()
-    return render_template("employees.html", employees=employees, search=search)
+    return render_template(
+        "employees.html", employees=employees, search=search,
+        sort=sort, direction=direction.lower(),
+    )
 
 
 @app.route("/employees/add", methods=["GET", "POST"])
